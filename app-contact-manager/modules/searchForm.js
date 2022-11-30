@@ -1,4 +1,7 @@
+import { addMessage } from './notificationBar.js';
 import { findContacts } from './query.js';
+import createMessage from './message.js';
+import { pluralize } from './utils.js';
 
 const searchForm = document.querySelector('.search-form');
 
@@ -12,9 +15,19 @@ searchForm.addEventListener('submit', (event) => {
   const queryString = queryInput.value;
 
   const contacts = findContacts(queryString);
+  const contactsCount = contacts.length;
 
-  if (contacts.length < 1) {
-    console.log(' no contacts found');
+  if (contactsCount < 1) {
+    addMessage(createMessage('No contacts found!'));
+  } else {
+    addMessage(
+      createMessage(
+        `Found ${pluralize(contactsCount, {
+          one: 'contact',
+          many: 'contacts',
+        })}.`,
+      ),
+    );
   }
 });
 
