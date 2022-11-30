@@ -1,4 +1,4 @@
-import { addMessage } from './notificationBar.js';
+import { addMessage, clearMessages } from './notificationBar.js';
 import { findContacts } from './query.js';
 import createMessage from './message.js';
 import { pluralize } from './utils.js';
@@ -13,6 +13,8 @@ searchForm.addEventListener('submit', (event) => {
   const form = event.currentTarget;
   const queryInput = form.q;
   const queryString = queryInput.value;
+
+  clearMessages();
 
   const contacts = findContacts(queryString);
   const contactsCount = contacts.length;
@@ -29,6 +31,8 @@ searchForm.addEventListener('submit', (event) => {
       ),
     );
   }
+
+  queryInput.value = '';
 });
 
 export default searchForm;
