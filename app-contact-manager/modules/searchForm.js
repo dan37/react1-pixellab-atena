@@ -18,7 +18,7 @@ searchForm.addEventListener('submit', (event) => {
   const contactsCount = contacts.length;
 
   if (contactsCount < 1) {
-    addMessage(createMessage('No contacts found!'));
+    addMessage(createMessage('No contacts found!', 'warning'));
   } else {
     addMessage(
       createMessage(
