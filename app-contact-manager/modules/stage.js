@@ -15,7 +15,7 @@ stage.addEventListener('click', (event) => {
     return;
   }
 
-  stage.innerHTML = '';
+  stage.innerHTML = ''; // clearStage();
 });
 
 // create contact
