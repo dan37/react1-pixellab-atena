@@ -22,3 +22,7 @@ export const findContacts = (needle = 'query') => {
 
   return results;
 };
+
+export const createContact = (contact) => {
+  console.log('create a contact');
+};
