@@ -17,6 +17,7 @@ searchForm.addEventListener('submit', (event) => {
   const queryString = queryInput.value;
 
   clearMessages();
+  stage.innerHTML = '';
 
   const contacts = findContacts(queryString);
   const contactsCount = contacts.length;
