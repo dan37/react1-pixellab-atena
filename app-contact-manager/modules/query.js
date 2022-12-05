@@ -24,5 +24,6 @@ export const findContacts = (needle = 'query') => {
 };
 
 export const createContact = (contact) => {
-  console.log('create a contact');
+  // push mutates
+  contacts.push(contact);
 };

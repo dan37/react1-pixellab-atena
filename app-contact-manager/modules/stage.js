@@ -1,4 +1,6 @@
+import { addMessage } from './notificationBar.js';
 import { createContact } from './query.js';
+import createMessage from './message.js';
 
 const stage = document.querySelector('.stage');
 
@@ -26,8 +28,21 @@ stage.addEventListener('submit', (event) => {
   }
 
   const form = target;
+  // these are HTML elements:
+  const { name, surname, phone, email } = form;
+  const contact = {
+    id: Date.now().toString().slice(-6),
+    name: name.value,
+    surname: surname.value,
+    phone: phone.value,
+    email: email.value,
+  };
 
-  createContact({});
+  createContact(contact);
+
+  addMessage(createMessage(`Contact ${name.value} ${surname.value} created.`));
+
+  stage.innerHTML = '';
 });
 
 export default stage;
