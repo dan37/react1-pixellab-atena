@@ -46,3 +46,11 @@ export const deleteContact = (contactId) => {
     contacts.splice(contactIndex, 1);
   }
 };
+
+export const findContact = (contactId) => {
+  const contact = contacts.find((contact) => {
+    return contact.id === Number(contactId);
+  });
+
+  return contact;
+};
