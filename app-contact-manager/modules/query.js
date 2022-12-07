@@ -27,3 +27,7 @@ export const createContact = (contact) => {
   // push mutates
   contacts.push(contact);
 };
+
+export const deleteContact = (contactId) => {
+  console.log(contacts);
+};

@@ -1,9 +1,10 @@
 import { render as renderPet } from './pet.js';
 
 export const render = (contact) => {
-  const { name, surname, phone, email, pets = [] } = contact;
+  const { name, surname, phone, email, pets = [], id } = contact;
   const container = document.createElement('article');
   container.classList.add('contact', 'border', 'p-3', 'mb-4');
+  container.dataset.contactId = id;
 
   container.innerHTML = `
     <h1>${name + ' ' + surname}</h1>
@@ -14,7 +15,7 @@ export const render = (contact) => {
 
     <button title="Delete"
       type="button"
-      class="btn btn-secondary"
+      class="btn btn-secondary delete-contact"
     >Delete</button>
 
     <button title="Edit"

@@ -1,5 +1,5 @@
 import { addMessage } from './notificationBar.js';
-import { createContact } from './query.js';
+import { createContact, deleteContact } from './query.js';
 import createMessage from './message.js';
 
 const stage = document.querySelector('.stage');
@@ -43,6 +43,24 @@ stage.addEventListener('submit', (event) => {
   addMessage(createMessage(`Contact ${name.value} ${surname.value} created.`));
 
   stage.innerHTML = '';
+});
+
+// delete contact
+stage.addEventListener('click', (event) => {
+  const { target } = event;
+
+  if (
+    target.nodeName !== 'BUTTON' ||
+    !target.classList.contains('delete-contact')
+  ) {
+    return;
+  }
+
+  const button = target;
+  const parent = button.parentElement;
+  const contactId = Number(parent.dataset.contactId);
+
+  deleteContact(contactId);
 });
 
 export default stage;
