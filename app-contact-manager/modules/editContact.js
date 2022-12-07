@@ -45,7 +45,7 @@ export const render = (contact) => {
       <button type="button"
         title="Cancel"
         class="btn btn-secondary cancel-button"
-      >Save</button>
+      >Cancel</button>
     </div>
   `;
 
