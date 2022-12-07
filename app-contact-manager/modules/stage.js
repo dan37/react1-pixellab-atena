@@ -1,4 +1,4 @@
-import { addMessage } from './notificationBar.js';
+import { addMessage, clearMessages } from './notificationBar.js';
 import { createContact, deleteContact } from './query.js';
 import createMessage from './message.js';
 
@@ -61,6 +61,11 @@ stage.addEventListener('click', (event) => {
   const contactId = Number(parent.dataset.contactId);
 
   deleteContact(contactId);
+  parent.remove();
+
+  clearMessages();
+
+  addMessage(createMessage('Contact removed', 'danger'));
 });
 
 export default stage;

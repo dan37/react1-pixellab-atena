@@ -29,5 +29,20 @@ export const createContact = (contact) => {
 };
 
 export const deleteContact = (contactId) => {
-  console.log(contacts);
+  let contactIndex = -1;
+
+  for (let i = 0; i < contacts.length; i++) {
+    const contact = contacts[i];
+
+    if (contactId === contact.id) {
+      contactIndex = i;
+
+      break;
+    }
+  }
+
+  if (contactIndex >= 0) {
+    // splice mutates
+    contacts.splice(contactIndex, 1);
+  }
 };
