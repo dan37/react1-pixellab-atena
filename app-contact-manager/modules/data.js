@@ -3,7 +3,7 @@ export default [
     id: 1,
     name: 'Carol',
     surname: 'Carolson',
-    phone: '0741000000',
+    phone: '0741000001',
     email: 'carol@carol.ro',
   },
   {
