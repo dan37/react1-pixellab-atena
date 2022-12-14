@@ -11,6 +11,10 @@ import { render as renderEditContact } from './editContact.js';
 import { render as renderPetForm } from './addPetForm.js';
 
 const stage = document.querySelector('.stage');
+export const clearStage = () => {
+  //tema functie refactorizare
+  stage.innerHTML = '';
+};
 
 // cancel action button
 stage.addEventListener('click', (event) => {
@@ -22,8 +26,8 @@ stage.addEventListener('click', (event) => {
   ) {
     return;
   }
-
-  stage.innerHTML = ''; // clearStage();
+  clearStage();
+  // stage.innerHTML = ''; // clearStage();
 });
 
 // create contact
@@ -50,7 +54,8 @@ stage.addEventListener('submit', (event) => {
 
   addMessage(createMessage(`Contact ${name.value} ${surname.value} created.`));
 
-  stage.innerHTML = '';
+  // stage.innerHTML = '';
+  clearStage();
 });
 
 // delete contact
@@ -92,7 +97,9 @@ stage.addEventListener('click', (event) => {
   const contactId = Number(parentElement.dataset.contactId);
   const contact = findContact(contactId);
 
-  stage.innerHTML = '';
+  // stage.innerHTML = '';
+
+  clearStage();
 
   stage.append(renderEditContact(contact));
 });
@@ -122,8 +129,11 @@ stage.addEventListener('submit', (event) => {
     email: email.value,
   });
 
-  stage.innerHTML = '';
+  // stage.innerHTML = '';
+  clearStage();
+
   clearMessages();
+
   addMessage(
     createMessage(`Contact ${contact.name} ${contact.surname} updated.`),
   );
@@ -145,7 +155,8 @@ stage.addEventListener('click', (event) => {
   const contactId = parentElement.dataset.contactId;
 
   // voi folositi metoda de la teme
-  stage.innerHTML = '';
+  // stage.innerHTML = '';
+  clearStage();
 
   stage.append(renderPetForm(contactId));
 });
@@ -173,7 +184,9 @@ stage.addEventListener('submit', (event) => {
   // cum putem sa afisam pet created for contact Carol
 
   // folositi metoda de clear stage
-  stage.innerHTML = '';
+  // stage.innerHTML = '';
+
+  clearStage();
 
   addMessage(
     createMessage(`Pet ${name.value} created for contact ${contactId.value}`),

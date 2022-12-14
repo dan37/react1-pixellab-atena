@@ -4,6 +4,7 @@ import createMessage from './message.js';
 import { pluralize } from './utils.js';
 import { render } from './contact.js';
 import stage from './stage.js';
+import { clearStage } from './stage.js';
 
 const searchForm = document.querySelector('.search-form');
 
@@ -14,14 +15,17 @@ searchForm.addEventListener('submit', (event) => {
   // am rulat addEventListener
   const form = event.currentTarget;
   const queryInput = form.q;
-  const queryString = queryInput.value.trim();
+  const queryString = queryInput.value.toLowerCase().replace(/\s/g, '').trim(); //tema cautare cu spatii
 
   if (queryString.length <= 3) {
     return;
   }
 
   clearMessages();
-  stage.innerHTML = '';
+
+  clearStage();
+
+  // stage.innerHTML = '';
 
   const contacts = findContacts(queryString);
   const contactsCount = contacts.length;

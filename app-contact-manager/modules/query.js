@@ -7,10 +7,10 @@ export const findContacts = (needle = 'query') => {
 
     const haystack = values.reduce((haystack, value) => {
       if (typeof value === 'string') {
-        haystack += value;
+        haystack += value.toLowerCase(); //tema toLowerCase
       }
 
-      return haystack;
+      return haystack; //merge si aici pus toLowerCase.
     }, '');
 
     if (haystack.includes(needle)) {
