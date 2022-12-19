@@ -1,4 +1,7 @@
-import { addMessage, clearMessages } from './notificationBar.js';
+import notificationBar, {
+  addMessage,
+  clearMessages,
+} from './notificationBar.js';
 import {
   createContact,
   createPet,
@@ -194,3 +197,16 @@ stage.addEventListener('submit', (event) => {
 });
 
 export default stage;
+
+//TEMA daca elementul este de tip buton si are clasa close-button dam remove la divul notify bar
+notificationBar.addEventListener('click', (event) => {
+  event.preventDefault();
+  const { target } = event;
+
+  if (
+    target.nodeName == 'BUTTON' &&
+    target.classList.contains('close-button') //vad ca, merge si daca sterg conditia asta dar asa pare mai specific
+  ) {
+    notificationBar.remove();
+  }
+});
