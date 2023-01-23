@@ -18,18 +18,19 @@ export default (message = '', type = 'success') => {
   messageContainer.append(closeButton);
 
   //Tema daca mesajul este ..punem pe buton classa warning , pentru alt caz punem alta clasa.
+
   if (message == 'No contacts found!') {
     closeButton.classList.add('btn', 'btn-warning');
   } else {
     closeButton.classList.add('btn', 'btn-danger');
   }
 
-  const removeDelay = () => {
-    messageContainer.remove(); //merge si cu return ..dar nu stiu cum este mai bine
-    // closeButton.remove(); //aici nu stiu daca e bine sa sterg si buttonul. Daca nu il sterg se muta in stanga.
-  };
+  // const removeDelay = () => {
+  //   messageContainer.remove();
+  //   // closeButton.remove();
+  // };
 
-  setTimeout(removeDelay, 2000);
+  // setTimeout(removeDelay, 2000);
 
   return messageContainer;
 };

@@ -1,5 +1,4 @@
 import contacts from './data.js';
-
 export const findContacts = (needle = 'query') => {
   const results = contacts.filter((contact) => {
     const values = Object.values(contact);
@@ -56,7 +55,6 @@ export const findContact = (contactId) => {
 };
 
 export const updateContact = (contactId, { name, surname, phone, email }) => {
-  // const name = contact.name;
   const contact = findContact(contactId);
 
   if (!contact) {
@@ -80,4 +78,36 @@ export const createPet = (contactId, pet) => {
 
   // push mutates
   contact.pets.push(pet);
+};
+
+//edit pet
+export const findPet = (petId) => {
+  let pet = null;
+  contacts.forEach((currentContact) => {
+    const pets = currentContact.pets ?? null;
+
+    if (pets) {
+      pets.forEach((currentPet) => {
+        if (currentPet.id === Number(petId)) {
+          pet = currentPet;
+        }
+      });
+    }
+  });
+
+  return pet;
+};
+
+//update pet
+export const updatePet = (petId, { name, species, age }) => {
+  // const name = contact.name;
+  const pet = findPet(petId);
+
+  if (!pet) {
+    return;
+  }
+
+  pet.name = name;
+  pet.species = species;
+  pet.age = age;
 };

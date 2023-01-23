@@ -18,7 +18,7 @@ export const render = (pet) => {
 
     <button title="Edit"
       type="button"
-      class="btn btn-secondary"
+      class="btn btn-secondary edit-pet-button"
     >Edit</button>
   `;
 

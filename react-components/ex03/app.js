@@ -77,3 +77,26 @@ const message2 = Object.values(person.friends).reduce(
   '',
 );
 console.log(message2);
+
+console.warn(`Prin aceeasi metoda, afiseaza o lista cu numele complet al prietenilor.
+`);
+Object.values(person.friends).forEach(({ name, surname }) => {
+  console.log(`${name} ${surname}`);
+});
+
+console.warn(`Afiseaza propozitia: “Prietenii mei sunt Larry Larryson, Steven Stevenson si Carol Carolson.” folosind Object.values()
+`);
+const string4 = values2.map(({ name, surname }) => {
+  const phrase = `Prietenii mei sunt `;
+  return `${phrase} ${name} ${surname}, `;
+});
+
+console.log(string4.toString());
+
+console.warn(
+  `In mod similar, afiseaza propozitia  “Larry are xx ani. Steven are …”`,
+);
+const string5 = Object.values(person.friends).map(({ name, age }) => {
+  return `${name} are ${age} ani.`;
+});
+console.log(string5.toString());

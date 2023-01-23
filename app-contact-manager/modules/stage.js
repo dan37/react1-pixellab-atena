@@ -7,11 +7,14 @@ import {
   createPet,
   deleteContact,
   findContact,
+  findPet,
   updateContact,
+  updatePet,
 } from './query.js';
 import createMessage from './message.js';
 import { render as renderEditContact } from './editContact.js';
 import { render as renderPetForm } from './addPetForm.js';
+import { render as renderEditPetForm } from './editPetForm.js';
 
 const stage = document.querySelector('.stage');
 export const clearStage = () => {
@@ -59,6 +62,19 @@ stage.addEventListener('submit', (event) => {
 
   // stage.innerHTML = '';
   clearStage();
+});
+
+//TEMA daca elementul este de tip buton si are clasa close-button dam remove la divul notify bar
+notificationBar.addEventListener('click', (event) => {
+  event.preventDefault();
+  const { target } = event;
+
+  if (
+    target.nodeName == 'BUTTON' &&
+    target.classList.contains('close-button') //vad ca, merge si daca sterg conditia asta dar asa pare mai specific
+  ) {
+    notificationBar.remove();
+  }
 });
 
 // delete contact
@@ -157,7 +173,6 @@ stage.addEventListener('click', (event) => {
   const parentElement = button.parentElement;
   const contactId = parentElement.dataset.contactId;
 
-  // voi folositi metoda de la teme
   // stage.innerHTML = '';
   clearStage();
 
@@ -175,7 +190,13 @@ stage.addEventListener('submit', (event) => {
 
   const form = target;
   // DOM input elements
+
   const { name, species, age, contactId } = form;
+
+  //extragere contact din query
+  const contact = findContact(contactId.value);
+  const contactName = contact.name;
+  const contactSurname = contact.surname;
 
   createPet(contactId.value, {
     name: name.value,
@@ -184,29 +205,66 @@ stage.addEventListener('submit', (event) => {
     id: Number(Date.now().toString().slice(-6)),
   });
 
-  // cum putem sa afisam pet created for contact Carol
-
-  // folositi metoda de clear stage
   // stage.innerHTML = '';
 
   clearStage();
 
   addMessage(
-    createMessage(`Pet ${name.value} created for contact ${contactId.value}`),
+    createMessage(
+      `Pet ${name.value} with id ${contactId.value} is created for contact ${contactName} ${contactSurname}`,
+    ),
   );
 });
 
-export default stage;
+//edit pet
+stage.addEventListener('click', (event) => {
+  const { target } = event;
+  if (
+    target.nodeName !== 'BUTTON' ||
+    !target.classList.contains('edit-pet-button')
+  ) {
+    return;
+  }
 
-//TEMA daca elementul este de tip buton si are clasa close-button dam remove la divul notify bar
-notificationBar.addEventListener('click', (event) => {
+  const button = target;
+  const parentElement = button.parentElement;
+  const contactId = Number(parentElement.dataset.contactId);
+  const petId = Number(parentElement.dataset.petId);
+  // stage.innerHTML = '';
+
+  clearStage();
+
+  stage.append(renderEditPetForm(contactId, petId));
+});
+
+// edit submit pet
+stage.addEventListener('submit', (event) => {
   event.preventDefault();
   const { target } = event;
 
-  if (
-    target.nodeName == 'BUTTON' &&
-    target.classList.contains('close-button') //vad ca, merge si daca sterg conditia asta dar asa pare mai specific
-  ) {
-    notificationBar.remove();
+  if (target.nodeName !== 'FORM' || !target.classList.contains('edit-pet')) {
+    return;
   }
+
+  const form = target;
+  // DOM elements (need .value)
+  const { id, species, age, name } = form;
+  const petId = id.value;
+  const pet = findPet(petId);
+
+  //update pet
+  updatePet(petId, {
+    name: name.value,
+    species: species.value,
+    age: age.value,
+  });
+
+  // stage.innerHTML = '';
+  clearStage();
+
+  clearMessages();
+
+  addMessage(createMessage(`Contact ${pet.name} ${pet.age} updated.`));
 });
+
+export default stage;
